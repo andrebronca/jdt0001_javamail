@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -197,14 +199,26 @@ public class EnviarEmail {
 				corpoEmail.setText( getConteudo() );	//conteúdo do e-mail
 			}
 			
-			//anexo
-			MimeBodyPart anexoEmail = new MimeBodyPart();
-			anexoEmail.setDataHandler(new DataHandler(new ByteArrayDataSource(simuladorPDF(), "application/pdf")));
-			anexoEmail.setFileName("jdt0001_simulado.pdf");
+			//simulando uma lista de anexos
+			List<FileInputStream> listaAnexos = new ArrayList<>();
+			listaAnexos.add(simuladorPDF());
+			listaAnexos.add(simuladorPDF());
+			listaAnexos.add(simuladorPDF());
+			listaAnexos.add(simuladorPDF());
 			
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(corpoEmail);
-			multipart.addBodyPart(anexoEmail);
+			
+			int seqArquivo = 1;
+			for(FileInputStream f : listaAnexos) {
+				//anexo
+				MimeBodyPart anexoEmail = new MimeBodyPart();
+				
+				anexoEmail.setDataHandler(new DataHandler(new ByteArrayDataSource( f, "application/pdf")));
+				anexoEmail.setFileName("jdt0001_simulado"+ seqArquivo++ +".pdf");
+				
+				multipart.addBodyPart(anexoEmail);
+			}
 			message.setContent(multipart);
 			Transport.send(message);
 			

@@ -44,6 +44,6 @@ public class EnviarEmailTest {
 		envEmail.setNomeRemetente("Andre R.B. (JDT0001-teste)");
 		envEmail.setConteudo(sb.toString());
 		envEmail.enviarEmailComAnexo(true);
-		//enviado com sucesso, demorou no teste (10,324 s)
+		//enviado com sucesso, demorou no teste (10,324 s), com 4 anexos (12,981 s)
 	}
 }
