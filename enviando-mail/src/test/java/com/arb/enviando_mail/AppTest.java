@@ -35,6 +35,7 @@ public class AppTest {
 			properties.put("mail.smtp.port", "587");	//465 ou 587 (ambas funcionaram)
 			properties.put("mail.smtp.socketFactory.port", "465");
 			properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			properties.put("mail.smtp.ssl.trust", "*");
 			
 			Session session = Session.getInstance(properties, new Authenticator() {
 				@Override
@@ -45,14 +46,16 @@ public class AppTest {
 			
 			Address toUsers[] = InternetAddress.parse("bronca.andre@gmail.com,madoo.mop@gmail.com,"+ userName);
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(userName));	//quem está enviando
+			message.setFrom(new InternetAddress(userName,"André R.B. - jdt0001 - teste"));	//quem está enviando
 			message.setRecipients(Message.RecipientType.TO, toUsers);	//e-mail de destino
 			message.setSubject("jdt0001: Envio de e-mail - teste");	//assunto do e-mail
 			message.setText("Formação Java Web Full Stack (jdt0001) - teste");	//conteúdo do e-mail
 			
 			Transport.send(message);
 			//Envio realizado com sucesso: 25/set/2022 11:38
-			
+
+			//Caso não esteja sendo enviado no teste, adicionar um temporizador (não precisei usar)
+//			Thread.sleep(2000);	//aguarda 2 segundos antes de finalizar o teste.
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package com.arb.enviando_mail;
+package com.arb.app;
 
 /**
  * Hello world!
