@@ -34,6 +34,9 @@ public class EnviarEmail {
 		this.assunto = assunto;
 		this.conteudo = conteudo;
 	}
+	
+	public EnviarEmail() {
+	}
 
 	/**
 	 * String da lista de emails separados por ',' (vírgula)
@@ -76,7 +79,7 @@ public class EnviarEmail {
 		return conteudo;
 	}
 	
-	public void enviarEmail() {
+	public void enviarEmail(boolean isHtml) {
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", "true");	//autorização
 		properties.put("mail.smtp.starttls.enable", "true");	//autenticação
@@ -99,7 +102,12 @@ public class EnviarEmail {
 			message.setFrom(new InternetAddress(userName, getNomeRemetente() ));	//quem está enviando
 			message.setRecipients(Message.RecipientType.TO, toUsers);	//e-mail de destino
 			message.setSubject( getAssunto() );	//assunto do e-mail
-			message.setText( getConteudo() );	//conteúdo do e-mail
+			
+			if (isHtml) {
+				message.setContent(getConteudo(), "text/html; charset=\"utf-8\"");
+			} else {
+				message.setText( getConteudo() );	//conteúdo do e-mail
+			}
 			
 			Transport.send(message);
 		} catch (AddressException e) {
