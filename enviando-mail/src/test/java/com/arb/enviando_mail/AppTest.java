@@ -2,9 +2,14 @@ package com.arb.enviando_mail;
 
 import java.util.Properties;
 
+import javax.mail.Address;
 import javax.mail.Authenticator;
+import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.junit.Test;
 
@@ -12,6 +17,9 @@ import org.junit.Test;
  * Unit test for simple App.
  */
 public class AppTest {
+	
+	private String userName = "y8mvezhpr6pqb4@gmail.com";
+	private String senha = "pylvajvvzcykckdy";	//token
 
 	@Test
 	public void testeEmail() {
@@ -31,12 +39,21 @@ public class AppTest {
 			Session session = Session.getInstance(properties, new Authenticator() {
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return PasswordAuthentication()
+					return new PasswordAuthentication(userName,senha);
 				}
 			});
 			
+			Address toUsers[] = InternetAddress.parse("bronca.andre@gmail.com,madoo.mop@gmail.com,"+ userName);
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(userName));	//quem está enviando
+			message.setRecipients(Message.RecipientType.TO, toUsers);	//e-mail de destino
+			message.setSubject("jdt0001: Envio de e-mail - teste");	//assunto do e-mail
+			message.setText("Formação Java Web Full Stack (jdt0001) - teste");	//conteúdo do e-mail
+			
+			Transport.send(message);
+			//Envio realizado com sucesso: 25/set/2022 11:38
+			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
