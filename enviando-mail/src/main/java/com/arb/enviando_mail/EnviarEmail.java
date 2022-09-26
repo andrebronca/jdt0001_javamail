@@ -45,6 +45,7 @@ public class EnviarEmail {
 	private String nomeRemetente;	//descrição de quem enviou, diferente do e-mail
 	private String assunto;			//titulo do e-mail
 	private String conteudo; 		//conteúdo do e-mail
+	public static final String LISTAEMAILS = "bronca.andre@gmail.com,madoo.mop@gmail.com";
 	
 	public EnviarEmail(String listaEmails, String nomeRemetente, String assunto, String conteudo) {
 		this.listaEmails = listaEmails;

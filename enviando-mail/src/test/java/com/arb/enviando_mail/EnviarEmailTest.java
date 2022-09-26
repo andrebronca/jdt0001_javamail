@@ -7,7 +7,7 @@ public class EnviarEmailTest {
 	@Test
 	public void testEnvioEmailSemHtml() {
 		EnviarEmail envEmail = new EnviarEmail();
-		envEmail.setListaEmails("madoo.mop@gmail.com,bronca.andre@gmail.com", true);
+		envEmail.setListaEmails(EnviarEmail.LISTAEMAILS, true);
 		envEmail.setAssunto("JDT0001 - Definindo classe de envio - teste");
 		envEmail.setNomeRemetente("Andre R.B. (JDT0001-teste)");
 		envEmail.setConteudo("O Conteúdo do e-mail pode ser personalizado nesse método");
@@ -23,7 +23,7 @@ public class EnviarEmailTest {
 		sb.append("<p>JDT0001</p>");
 		
 		EnviarEmail envEmail = new EnviarEmail();
-		envEmail.setListaEmails("madoo.mop@gmail.com,bronca.andre@gmail.com", true);
+		envEmail.setListaEmails(EnviarEmail.LISTAEMAILS, true);
 		envEmail.setAssunto("JDT0001 - Definindo classe de envio - teste");
 		envEmail.setNomeRemetente("Andre R.B. (JDT0001-teste)");
 		envEmail.setConteudo(sb.toString());
@@ -39,7 +39,7 @@ public class EnviarEmailTest {
 		sb.append("<p>JDT0001</p>");
 		
 		EnviarEmail envEmail = new EnviarEmail();
-		envEmail.setListaEmails("madoo.mop@gmail.com,bronca.andre@gmail.com", true);
+		envEmail.setListaEmails(EnviarEmail.LISTAEMAILS, true);
 		envEmail.setAssunto("JDT0001 - Definindo classe de envio - teste");
 		envEmail.setNomeRemetente("Andre R.B. (JDT0001-teste)");
 		envEmail.setConteudo(sb.toString());
